@@ -56,9 +56,10 @@ app.post('/getComplexity', (req, res) => ***REMOVED***
 	let postSentence = req.body.sentence
 	res.setHeader('Content-Type', 'text/json')
 	let results = getSentenceComplexity(postSentence)
+	console.log("Get complexity called with sentence:", postSentence)
 	res.send(JSON.stringify(results))
 ***REMOVED***)
 
-app.listen('8080', () => ***REMOVED***
+app.listen('80', () => ***REMOVED***
 	console.log("server running")
 ***REMOVED***)
