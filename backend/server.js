@@ -1,6 +1,11 @@
 var app = require('express')()
 var cors = require('cors')
 var bodyParser = require('body-parser')
+var FormData = require('form-data')
+var querystring = require('querystring')
+var axios = require('axios')
+var request = require('request');
+
 
 app.use(cors())
 app.use(bodyParser.urlencoded(***REMOVED*** extended: false ***REMOVED***));
@@ -50,8 +55,41 @@ console.log(getSentenceComplexity(""))
 app.get('/', (req, res) => ***REMOVED***
 	res.setHeader('Content-Type', 'text/html')
 	res.send("Server successfully running!")
-	console.log("Logging")
+	console.log("Main page visited")
 ***REMOVED***)
+
+let getWolframComplexity = (sentence, cb) => ***REMOVED***
+
+	var options = ***REMOVED*** method: 'POST',
+	  url: 'https://www.wolframcloud.com/objects/ed366ba1-1e31-457d-93d2-bef835726fef',
+	  headers: 
+	   ***REMOVED*** 'Content-Type': 'application/x-www-form-urlencoded' ***REMOVED***,
+	  form: 
+	   ***REMOVED*** Input: sentence***REMOVED*** ***REMOVED***;
+
+	request(options, function (error, response, body) ***REMOVED***
+	  if (error) throw new Error(error);
+
+	  
+	  cb(body)
+	***REMOVED***);
+
+***REMOVED***
+
+app.post('/getWolframComplexity', async (req, res) => ***REMOVED***
+	let postSentence = req.body.sentence
+	res.setHeader('Content-Type', 'text/json')
+	try ***REMOVED***
+		getWolframComplexity(postSentence, results => ***REMOVED***
+			console.log(`Wolfram complexity called with $***REMOVED***postSentence***REMOVED*** with complexity of $***REMOVED***results***REMOVED***`)
+			res.send(JSON.stringify(results))
+		***REMOVED***)
+	***REMOVED*** catch (e) ***REMOVED***
+		console.error(e)
+		res.send(JSON.stringify(***REMOVED***error: e***REMOVED***))
+	***REMOVED***
+***REMOVED***) 
+
 app.post('/getComplexity', (req, res) => ***REMOVED***
 	let postSentence = req.body.sentence
 	res.setHeader('Content-Type', 'text/json')
