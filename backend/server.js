@@ -2,7 +2,7 @@ var app = require('express')()
 var cors = require('cors')
 var bodyParser = require('body-parser')
 
-app.use(cors)
+app.use(cors())
 app.use(bodyParser.urlencoded(***REMOVED*** extended: false ***REMOVED***));
 app.use(bodyParser.json());
 
@@ -47,9 +47,18 @@ let getSentenceComplexity = (sentence) => ***REMOVED***
 
 console.log(getSentenceComplexity(""))
 
+app.get('/', (req, res) => ***REMOVED***
+	res.setHeader('Content-Type', 'text/html')
+	res.send("Server successfully running!")
+	console.log("Logging")
+***REMOVED***)
 app.post('/getComplexity', (req, res) => ***REMOVED***
 	let postSentence = req.body.sentence
 	res.setHeader('Content-Type', 'text/json')
 	let results = getSentenceComplexity(postSentence)
 	res.send(JSON.stringify(results))
+***REMOVED***)
+
+app.listen('8080', () => ***REMOVED***
+	console.log("server running")
 ***REMOVED***)
