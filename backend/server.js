@@ -82,7 +82,7 @@ app.post('/getWolframComplexity', async (req, res) => ***REMOVED***
 	try ***REMOVED***
 		getWolframComplexity(postSentence, results => ***REMOVED***
 			console.log(`Wolfram complexity called with $***REMOVED***postSentence***REMOVED*** with complexity of $***REMOVED***results***REMOVED***`)
-			res.send(JSON.stringify(results))
+			res.send(JSON.stringify(***REMOVED***complexity: results***REMOVED***))
 		***REMOVED***)
 	***REMOVED*** catch (e) ***REMOVED***
 		console.error(e)
