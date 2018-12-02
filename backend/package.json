@@ -18,6 +18,8 @@
     "form-data": "^2.3.3",
     "formdata-node": "^1.2.0",
     "querystring": "^0.2.0",
-    "request": "^2.88.0"
+    "reading-level": "0.0.7",
+    "request": "^2.88.0",
+    "syllable": "^3.2.0"
   ***REMOVED***
 ***REMOVED***

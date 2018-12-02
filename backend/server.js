@@ -5,7 +5,7 @@ var FormData = require('form-data')
 var querystring = require('querystring')
 var axios = require('axios')
 var request = require('request');
-
+var readability = require('./readability.js')
 
 app.use(cors())
 app.use(bodyParser.urlencoded(***REMOVED*** extended: false ***REMOVED***));
@@ -50,8 +50,6 @@ let getSentenceComplexity = (sentence) => ***REMOVED***
 	return ***REMOVED***"complexity": diffObject.numHard * 5 + diffObject.numEasy * 3***REMOVED***
 ***REMOVED***
 
-console.log(getSentenceComplexity(""))
-
 app.get('/', (req, res) => ***REMOVED***
 	res.setHeader('Content-Type', 'text/html')
 	res.send("Server successfully running!")
@@ -61,7 +59,7 @@ app.get('/', (req, res) => ***REMOVED***
 let getWolframComplexity = (sentence, cb) => ***REMOVED***
 
 	var options = ***REMOVED*** method: 'POST',
-	  url: 'https://www.wolframcloud.com/objects/ed366ba1-1e31-457d-93d2-bef835726fef',
+	  url: 'https://www.wolframcloud.com/objects/25496950-6817-4820-8ea6-a3a81ad1f4ec',
 	  headers: 
 	   ***REMOVED*** 'Content-Type': 'application/x-www-form-urlencoded' ***REMOVED***,
 	  form: 
@@ -107,6 +105,19 @@ app.post('/getNeuralNetComplexity', async (req, res) => ***REMOVED***
 		res.send(JSON.stringify(***REMOVED***error: e***REMOVED***))
 	***REMOVED***
 ***REMOVED***) 
+
+app.post('/getReadability', async (req, res) => ***REMOVED***
+	let postSentence = req.body.sentence
+	console.log("Readability called with sentence", postSentence)
+	let fleschKincaid = readability.getFleschKincaidReadability(postSentence)
+	let automated = readability.getAutomatedReadability(postSentence)
+	console.log(fleschKincaid, automated)
+	res.setHeader('Content-Type', 'text/json')
+	res.send(JSON.stringify(***REMOVED***
+		flesch: fleschKincaid,
+		ari: automated
+	***REMOVED***))
+***REMOVED***)
 
 app.post('/getWolframComplexity', async (req, res) => ***REMOVED***
 	let postSentence = req.body.sentence
