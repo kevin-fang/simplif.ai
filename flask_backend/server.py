@@ -13,21 +13,21 @@ with open('../generated_data/word_to_num.pkl', 'rb') as f:
 	reverse_dict = pickle.load(f)
 
 def get_sentence_complexity(sentence):
-	print("sentence: ***REMOVED******REMOVED***".format(sentence))
+	print("sentence: {}".format(sentence))
 	num_list = []
 	for word in sentence.split(" "):
 		word = word.lower()
 		word = lemmatizer.lemmatize(word)
 		if word in reverse_dict:
 			num_list.append(reverse_dict[word])
-	print("num list: ***REMOVED******REMOVED***".format(num_list))
+	print("num list: {}".format(num_list))
 	sentence = np.array(num_list)
-	print("sentence ***REMOVED******REMOVED***".format(sentence))
+	print("sentence {}".format(sentence))
 	max_wiki_length = 100
 	sentence = sequence.pad_sequences(np.array([sentence]), maxlen=max_wiki_length)
-	print("sentence 2: ***REMOVED******REMOVED***".format(sentence))
+	print("sentence 2: {}".format(sentence))
 	result = model.predict(sentence)[0][0]
-	print("result: ***REMOVED******REMOVED***".format(result))
+	print("result: {}".format(result))
 	return result
 app = Flask(__name__)
 
@@ -35,7 +35,7 @@ app = Flask(__name__)
 def get_neural_complexity():
 	data = request.get_json()
 	complexity = get_sentence_complexity(data['sentence'])
-	print("complexity: ***REMOVED******REMOVED***".format(complexity))
+	print("complexity: {}".format(complexity))
 	return str(complexity)
 
 import os
