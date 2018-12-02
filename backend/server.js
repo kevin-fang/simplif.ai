@@ -97,7 +97,7 @@ app.post('/getNeuralNetComplexity', async (req, res) => ***REMOVED***
 		getNeuralNetComplexity(postSentence, results => ***REMOVED***
 			console.log(`Neural net complexity called with $***REMOVED***postSentence***REMOVED*** with complexity of $***REMOVED***results***REMOVED***`)
 			let complex = 1
-			if (Number(results) >= 0.52) ***REMOVED***
+			if (Number(results) < 0.5) ***REMOVED***
 				complex = 0
 			***REMOVED***
 			res.send(JSON.stringify(***REMOVED***complexity: complex***REMOVED***))
