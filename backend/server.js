@@ -78,7 +78,7 @@ let getWolframComplexity = (sentence, cb) => ***REMOVED***
 
 let getNeuralNetComplexity = (sentence, cb) => ***REMOVED***
 	var options = ***REMOVED*** method: 'POST',
-		url: 'http://0.0.0.0:5000/getComplexity',
+		url: 'http://35.231.145.97/getComplexity',
 		headers: 
 		***REMOVED*** 'Content-Type': 'application/json' ***REMOVED***,
 		body: ***REMOVED*** sentence: sentence ***REMOVED***,
@@ -96,7 +96,11 @@ app.post('/getNeuralNetComplexity', async (req, res) => ***REMOVED***
 	try ***REMOVED***
 		getNeuralNetComplexity(postSentence, results => ***REMOVED***
 			console.log(`Neural net complexity called with $***REMOVED***postSentence***REMOVED*** with complexity of $***REMOVED***results***REMOVED***`)
-			res.send(JSON.stringify(***REMOVED***complexity: results***REMOVED***))
+			let complex = 1
+			if (Number(results) >= 0.52) ***REMOVED***
+				complex = 0
+			***REMOVED***
+			res.send(JSON.stringify(***REMOVED***complexity: complex***REMOVED***))
 		***REMOVED***)
 	***REMOVED*** catch (e) ***REMOVED***
 		console.error(e)
