@@ -3,6 +3,7 @@ from keras.models import load_model
 from keras.preprocessing import sequence
 import numpy as np
 from nltk.stem import WordNetLemmatizer
+import get_automl
 lemmatizer = WordNetLemmatizer()
 
 model = load_model("../generated_data/complexity_classifier.h5")
@@ -30,11 +31,19 @@ def get_sentence_complexity(sentence):
 	return result
 app = Flask(__name__)
 
-@app.route('/getComplexity', methods=["POST"])
-def get_complexity():
+@app.route('/getNeuralNetComplexity', methods=["POST"])
+def get_neural_complexity():
 	data = request.get_json()
 	complexity = get_sentence_complexity(data['sentence'])
 	print("complexity: ***REMOVED******REMOVED***".format(complexity))
+	return str(complexity)
+
+import os
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']='./simplif-ai.json'
+@app.route('/getAutoMLComplexity', methods=["POST"])
+def get_automl_complexity():
+	data = request.get_json()
+	complexity = get_automl.get_prediction(data['sentence'])
 	return str(complexity)
 
 if __name__ == "__main__":

@@ -76,7 +76,7 @@ let getWolframComplexity = (sentence, cb) => ***REMOVED***
 
 let getNeuralNetComplexity = (sentence, cb) => ***REMOVED***
 	var options = ***REMOVED*** method: 'POST',
-		url: 'http://35.231.145.97/getComplexity',
+		url: 'http://35.231.145.97/getNeuralNetComplexity',
 		headers: 
 		***REMOVED*** 'Content-Type': 'application/json' ***REMOVED***,
 		body: ***REMOVED*** sentence: sentence ***REMOVED***,
@@ -87,6 +87,34 @@ let getNeuralNetComplexity = (sentence, cb) => ***REMOVED***
 		cb(body)
 	***REMOVED***);
 ***REMOVED***
+
+let getAutoMLComplexity = (sentence, cb) => ***REMOVED***
+	var options = ***REMOVED*** method: 'POST',
+		url: 'http://35.231.145.97/getAutoMLComplexity',
+		headers: 
+		***REMOVED*** 'Content-Type': 'application/json' ***REMOVED***,
+		body: ***REMOVED*** sentence: sentence ***REMOVED***,
+		json: true ***REMOVED***;
+
+	request(options, function (error, response, body) ***REMOVED***
+		if (error) throw new Error(error);
+		cb(body)
+	***REMOVED***);
+***REMOVED***
+
+app.post('/getAutoMLComplexity', async (req, res) => ***REMOVED***
+	let postSentence = req.body.sentence
+	res.setHeader('Content-Type', 'text/json')
+	try ***REMOVED***
+		getAutoMLComplexity(postSentence, results => ***REMOVED***
+			console.log(`AutoML complexity called with $***REMOVED***postSentence***REMOVED*** with complexity of $***REMOVED***results***REMOVED***`)
+			res.send(results)
+		***REMOVED***)
+	***REMOVED*** catch (e) ***REMOVED***
+		console.error(e)
+		res.send(JSON.stringify(***REMOVED***error: e***REMOVED***))
+	***REMOVED***
+***REMOVED***) 
 
 app.post('/getNeuralNetComplexity', async (req, res) => ***REMOVED***
 	let postSentence = req.body.sentence
